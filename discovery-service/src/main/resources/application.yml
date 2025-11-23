@@ -1,0 +1,11 @@
+server:
+  port: 8761   # Eureka dashboard will run on this port
+
+spring:
+  application:
+    name: discovery-service
+
+eureka:
+  client:
+    register-with-eureka: false   # This app is the server itself
+    fetch-registry: false         # It won't try to get registry from others

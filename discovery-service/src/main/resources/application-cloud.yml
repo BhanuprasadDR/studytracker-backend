@@ -1,0 +1,12 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  cloud:
+    config:
+      enabled: false
+
+eureka:
+  client:
+    register-with-eureka: false   # this *is* the server
+    fetch-registry: false

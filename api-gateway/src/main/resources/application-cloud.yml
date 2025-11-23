@@ -1,0 +1,18 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  cloud:
+    config:
+      enabled: false
+  main:
+    web-application-type: reactive
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL}
+  instance:
+    prefer-ip-address: true

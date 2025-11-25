@@ -1,0 +1,17 @@
+server:
+  port: 8888    # config server will run here
+
+spring:
+  application:
+    name: config-service
+
+  profiles:
+    active: native
+
+  cloud:
+    config:
+      server:
+        native:
+          # Where to look for config files
+          # Files like api-gateway.yml, auth-service.yml, study-service.yml
+          search-locations: classpath:/config

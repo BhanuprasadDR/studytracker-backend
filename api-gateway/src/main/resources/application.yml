@@ -10,13 +10,13 @@ spring:
       routes:
         # 🔐 AUTH SERVICE ROUTES
         - id: auth-service
-          uri: lb://auth-service
+          uri: lb://AUTH-SERVICE
           predicates:
             - Path=/api/auth/**
 
         # 📚 STUDY SERVICE ROUTES
         - id: study-service
-          uri: lb://study-service
+          uri: lb://STUDY-SERVICE
           predicates:
             - Path=/api/study/**
 
@@ -25,8 +25,6 @@ spring:
           enabled: true
           lower-case-service-id: true
 
-  # 🔻 IMPORTANT: we are NOT using config-server on Render
-cloud:
     config:
       enabled: false
       import-check:
@@ -35,5 +33,5 @@ cloud:
 eureka:
   client:
     service-url:
-      # Will be overridden in Render by EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+      # this will be overridden in Render by EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
       defaultZone: http://localhost:8761/eureka

@@ -1,6 +1,39 @@
+server:
+  port: 8080
+
 spring:
   application:
-    name: api-gateway   # 🔹 must match api-gateway.yml in config-service
+    name: api-gateway
 
-  config:
-    import: "optional:configserver:http://localhost:8888"
+  cloud:
+    gateway:
+      routes:
+        # 🔐 AUTH SERVICE ROUTES
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth/**
+
+        # 📚 STUDY SERVICE ROUTES
+        - id: study-service
+          uri: lb://study-service
+          predicates:
+            - Path=/api/study/**
+
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+  # 🔻 IMPORTANT: we are NOT using config-server on Render
+cloud:
+    config:
+      enabled: false
+      import-check:
+        enabled: false
+
+eureka:
+  client:
+    service-url:
+      # Will be overridden in Render by EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+      defaultZone: http://localhost:8761/eureka

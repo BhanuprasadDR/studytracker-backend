@@ -1,6 +1,32 @@
+server:
+  port: ${PORT:8080}
+
 spring:
   application:
-    name: STUDY-SERVICE   # must match study-service.yml in config-service
+    name: STUDY-SERVICE
 
-  config:
-    import: "optional:configserver:http://localhost:8888"
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  cloud:
+    config:
+      enabled: false
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+  instance:
+    prefer-ip-address: true

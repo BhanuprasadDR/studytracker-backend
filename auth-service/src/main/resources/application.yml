@@ -11,6 +11,13 @@ spring:
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+    hikari:
+      maximum-pool-size: 2      # was 10 by default
+      minimum-idle: 1
+      idle-timeout: 600000      # 10 min
+      max-lifetime: 1800000     # 30 min
+      connection-timeout: 30000 # 30 sec
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -28,5 +35,6 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+
   instance:
     prefer-ip-address: true

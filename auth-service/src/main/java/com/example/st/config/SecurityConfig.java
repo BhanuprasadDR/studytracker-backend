@@ -16,6 +16,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/ping").permitAll()  
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults()); // simple for now
